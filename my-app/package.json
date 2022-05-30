@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:visual":"cypress open"
+    "test:visual":"cypress run 'cypress/integration/testing.js'"
   },
   "eslintConfig": {
     "extends": [

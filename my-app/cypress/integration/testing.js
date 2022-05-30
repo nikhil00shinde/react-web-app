@@ -28,8 +28,8 @@ describe("Empty",()=>{
     cy.go('back')
 
     // skill
-    cy.get("h1").eq(2).click()
     cy.wait(2000);
+    cy.get("h1").eq(2).click()
     cy.get(".left-div").click()
 
     // contact
