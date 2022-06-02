@@ -3,8 +3,50 @@
 /* eslint-disable jest/valid-expect */
 /// <reference types="cypress" />
 
-describe("Empty",()=>{
-  it("test one",()=>{
+describe("Testing",()=>{
+  it("test mobile version",()=>{
+    // cy.viewport(1280,720)
+    cy.viewport('iphone-6+')
+    cy.visit("https://nikhilshinde-portfolio.netlify.app/")
+
+    cy.contains("Projects").should("exist")
+
+    cy.get("h1").should(($div)=>{
+      
+      expect($div.get(1).innerText).contains("Experience")
+    })
+    cy.log("adfaesf")
+    cy.log(cy.get("h1"))
+    cy.log("adfaesf")
+
+    cy.get("div.App-header").should("not.exist")
+    cy.location('host') 
+    // project
+    cy.get("h1").eq(0).click()
+    cy.go('back')
+
+    //experience
+    cy.get("h1").eq(1).click()
+    cy.go('back')
+
+    // skill
+    cy.wait(2000);
+    cy.get("h1").eq(2).click()
+    cy.get(".left-div").click()
+
+    // contact
+    cy.wait(2000);
+    cy.get("h1").eq(3).click();
+    cy.get("#fname").type("Nikhil Shinde")
+    cy.get("#email").type("shinden523@gmail.com")
+    cy.get("#phone").type("8329634377");
+    cy.get("#comment").type("ksjfb;kjsnefk;jn;lksjne;gfj;kjr g;kj;aksr jg',;m s;r,gf")
+    cy.get(".back-button").click()
+
+  })
+
+  it("test Destop version",()=>{
+    cy.viewport(1280,720)
     cy.visit("https://nikhilshinde-portfolio.netlify.app/")
 
     cy.contains("Projects").should("exist")
