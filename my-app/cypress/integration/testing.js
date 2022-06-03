@@ -3,85 +3,43 @@
 /* eslint-disable jest/valid-expect */
 /// <reference types="cypress" />
 
-describe("Testing",()=>{
-  it("test mobile version",()=>{
-    // cy.viewport(1280,720)
-    cy.viewport('iphone-6+')
-    cy.visit("https://nikhilshinde-portfolio.netlify.app/")
-
-    cy.contains("Projects").should("exist")
-
-    cy.get("h1").should(($div)=>{
-      
-      expect($div.get(1).innerText).contains("Experience")
-    })
-    cy.log("adfaesf")
-    cy.log(cy.get("h1"))
-    cy.log("adfaesf")
-
-    cy.get("div.App-header").should("not.exist")
-    cy.location('host') 
-    // project
-    cy.get("h1").eq(0).click()
-    cy.go('back')
-
-    //experience
-    cy.get("h1").eq(1).click()
-    cy.go('back')
-
-    // skill
-    cy.wait(2000);
-    cy.get("h1").eq(2).click()
-    cy.get(".left-div").click()
-
-    // contact
-    cy.wait(2000);
-    cy.get("h1").eq(3).click();
-    cy.get("#fname").type("Nikhil Shinde")
-    cy.get("#email").type("shinden523@gmail.com")
-    cy.get("#phone").type("8329634377");
-    cy.get("#comment").type("ksjfb;kjsnefk;jn;lksjne;gfj;kjr g;kj;aksr jg',;m s;r,gf")
-    cy.get(".back-button").click()
-
-  })
-
-  it("test Destop version",()=>{
+describe("Basic Testing",()=>{
+  it("Page looks good",()=>{
     cy.viewport(1280,720)
-    cy.visit("https://nikhilshinde-portfolio.netlify.app/")
+    cy.visit("https://codedamn.com/")
 
-    cy.contains("Projects").should("exist")
+    cy.contains("Start learning").should("exist")
+    cy.contains("Playgrounds").should("exist")
+    cy.contains("Pricing").should("exist")
+    cy.contains("Contact Us").should("exist")
 
-    cy.get("h1").should(($div)=>{
-      
-      expect($div.get(1).innerText).contains("Experience")
-    })
-    cy.log("adfaesf")
-    cy.log(cy.get("h1"))
-    cy.log("adfaesf")
-
-    cy.get("div.App-header").should("not.exist")
-    cy.location('host') 
-    // project
-    cy.get("h1").eq(0).click()
-    cy.go('back')
-
-    //experience
-    cy.get("h1").eq(1).click()
-    cy.go('back')
-
-    // skill
-    cy.wait(2000);
-    cy.get("h1").eq(2).click()
-    cy.get(".left-div").click()
-
-    // contact
-    cy.wait(2000);
-    cy.get("h1").eq(3).click();
-    cy.get("#fname").type("Nikhil Shinde")
-    cy.get("#email").type("shinden523@gmail.com")
-    cy.get("#phone").type("8329634377");
-    cy.get("#comment").type("ksjfb;kjsnefk;jn;lksjne;gfj;kjr g;kj;aksr jg',;m s;r,gf")
-    cy.get(".back-button").click()
-
+    cy.contains("Sign in").click()
+    cy.contains("Forgot your password?").should("exist")
+    cy.contains("Don't have an account? Create one").should("exist")
   })
+
+  it.only("Login page looks",()=>{
+    cy.viewport(1280,720)
+    cy.visit("https://codedamn.com/")
+   
+    // 1. Sign in page
+    cy.contains("Sign in").click()
+   
+    // 2. password reset page
+    cy.contains("Forgot your password?").click({force: true})
+
+    // 3. verify your page URL
+    cy.url().should("include","/password-reset")
+
+    cy.url().then(value => {
+      cy.log("The current URL is: ",value)
+    })
+
+    // 4. go back, on the sign in page
+    cy.go('back')
+    
+  })
+
+
+
 })
