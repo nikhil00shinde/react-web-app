@@ -4,10 +4,15 @@
 /// <reference types="cypress" />
 
 describe("Basic Testing",()=>{
-  it("Page looks good",()=>{
+
+
+  beforeEach(()=>{
+    // bootstrapping external things
     cy.viewport(1280,720)
     cy.visit("https://codedamn.com/")
+  })
 
+  it("Page looks good",()=>{
     cy.contains("Start learning").should("exist")
     cy.contains("Playgrounds").should("exist")
     cy.contains("Pricing").should("exist")
@@ -18,9 +23,8 @@ describe("Basic Testing",()=>{
     cy.contains("Don't have an account? Create one").should("exist")
   })
 
-  it.only("Login page looks",()=>{
-    cy.viewport(1280,720)
-    cy.visit("https://codedamn.com/")
+  it("Login page looks",()=>{
+   
    
     // 1. Sign in page
     cy.contains("Sign in").click()
@@ -40,6 +44,17 @@ describe("Basic Testing",()=>{
     
   })
 
+  it.only("Login should display correct error",()=>{
+
+    cy.contains("Sign in").click()
+    
+   cy.contains("Unable to authorize").should("not.exist")
+
+    cy.get("[data-testid=username]").type("admin",{force: true})
+    cy.get("[data-testid=password]").type("admin", {force: true})
+      
+    cy.get("[data-testid=login]").click({force: true})
+  })
 
 
 })
