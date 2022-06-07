@@ -4,12 +4,16 @@
 /// <reference types="cypress" />
 
 describe("Basic Testing",()=>{
-
+  
 
   beforeEach(()=>{
     // bootstrapping external things
     cy.viewport(1280,720)
     cy.visit("https://codedamn.com/")
+
+    cy.then(()=>{
+      window.localStorage.setItem("__auth__token","lkjdsb;kcjnas;ljdnf;vlmsa;ldmf ;l/mnasdf")
+    })
   })
 
   it("Page looks good",()=>{
